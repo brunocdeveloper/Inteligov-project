@@ -1,11 +1,13 @@
-import './App.css';
+import React, { useState } from "react";
+import InputFile from "./components/InputFile";
+import AppProvider from "./context/AppProvider";
 
 function App() {
-  return (
-    <div className="App">
-      Primeiro commit
-    </div>
+  return(
+    <AppProvider>
+      <InputFile/>
+    </AppProvider>
   );
-}
+};
 
 export default App;
