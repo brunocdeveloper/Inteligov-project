@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '../context/AppContext';
+import Table from './Table';
 
 function InputFile() {
-  const { file, setFile, setHeader, header, setContent, content }  = useContext(AppContext);
+  const { file, setFile, setHeader, setContent,  }  = useContext(AppContext);
+  const [ renderTable, setRenderTable] = useState(false);
 
   const reader = new FileReader();
 
@@ -20,6 +22,7 @@ function InputFile() {
         setContent(conteudo);
       };
       reader.readAsText(file);
+      setRenderTable(true);
     };
   };
 
@@ -29,34 +32,10 @@ function InputFile() {
       <h2>Escolha um arquivo ou arraste</h2>
       <input type="file" onChange={ handleFile } accept=".csv" />
       <button type="button" onClick={ handleSubmitFile }>Enviar</button>
-      <table>
-        <thead>
-          <tr>
-            { header &&
-              Array.from({ length: 2 }).map((content, index) => (
-                header.map((headerName) => (
-                  <th>
-                    <input
-                      id={index}
-                      key={index}
-                      defaultValue={index === 0 ? headerName : '' }
-                    />
-                  </th>
-                ))
-              ))
-            }
-          </tr>
-        </thead>
-        <tbody>
-        { content &&
-            content.map((item, index) => (
-              <tr>
-              { item.map((arquive) => (<td><input placeholder={arquive}/></td>)) }
-              </tr>)
-            )
-        }
-        </tbody>
-      </table>
+      {
+        renderTable && 
+        <Table/>
+      }
      </div>
   );
 }
