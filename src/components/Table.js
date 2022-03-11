@@ -6,25 +6,23 @@ function Table() {
 
   const tratamentDataTable = {
     createEmptyRowInputs: (dataContent) => {
-      const EMPTY_INPUTS_LENGHT = 1;
+      const EMPTY_INPUTS_LENGHT = 8;
       for(let index = 0; index < EMPTY_INPUTS_LENGHT; index ++) {
         dataContent.push(["", "", ""]);
       }
     },
 
     createEmptyColumnInputs: (dataContent, header) => {
-      const EMPTY_HEADER_LENGTH = 1;
+      const EMPTY_HEADER_LENGTH = 8;
       for(let index = 0; index < EMPTY_HEADER_LENGTH; index++) {
-        dataContent.map((itens) => {
-          itens.push("")
-        });
+        dataContent.map((itens) => itens.push(""));
       }
     },
 
     createEmptyInputHeader: (header) => {
-      const HEADER_LENGTH = 1;
+      const HEADER_LENGTH = 2;
       for(let index = 0; index < HEADER_LENGTH; index ++) {
-        header.push("")
+        header.push("");
       }
     }
   }
@@ -71,22 +69,22 @@ function Table() {
         <tbody>
           {
             content &&
-            content.map((item, index) => (
-              <tr key={index}>
-                {
-                  item.map((nameItens, indexItens) => (
-                    <td key={indexItens}>
-                      <input
-                        className={index}
-                        name={indexItens}
-                        defaultValue={nameItens}
-                        onChange={handleInputs.handleContent}
-                      />
-                    </td>
-                  ))
-                }
-              </tr>
-            ))
+              content.map((item, index) => (
+                <tr key={index}>
+                  {
+                    item.map((nameItens, indexItens) => (
+                      <td key={indexItens}>
+                        <input
+                          className={index}
+                          name={indexItens}
+                          defaultValue={nameItens}
+                          onChange={handleInputs.handleContent}
+                        />
+                      </td>
+                    ))
+                  }
+                </tr>
+              ))
           }
         </tbody>
       </table>

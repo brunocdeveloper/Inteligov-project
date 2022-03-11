@@ -1,11 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
-import Download from './Download';
-import Table from './Table';
 
 function InputFile() {
-  const { setFile, setHeader, setContent, setInitialDocument }  = useContext(AppContext);
-  const [ renderTable, setRenderTable] = useState(false);
+  const { 
+    setFile, setHeader,
+    setContent, setInitialDocument,
+    setRenderTable
+  } = useContext(AppContext);
 
   const handleSubmitFile = (file) => {
     if(file) {
@@ -21,7 +22,6 @@ function InputFile() {
 
   return (
     <div>
-      <h1>Bem vindo!</h1>
       <div
         onDragOver={(e) => {
         e.preventDefault();
@@ -39,14 +39,6 @@ function InputFile() {
       >
         ARRASTE UM ARQUIVO
       </div>
-      {
-        renderTable && 
-        <Table/>
-      }
-      {
-        renderTable &&
-        <Download />
-      }
      </div>
   );
 }

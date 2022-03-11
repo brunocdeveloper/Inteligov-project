@@ -6,6 +6,7 @@ function AppProvider({ children }) {
   const [header, setHeader] = useState(null);
   const [content, setContent] = useState(null);
   const [initialDocument, setInitialDocument] = useState([]);
+  const [renderTable, setRenderTable] = useState(false);
 
   const contextValue = {
     initialDocument,
@@ -15,7 +16,9 @@ function AppProvider({ children }) {
     header,
     setHeader,
     content,
-    setContent
+    setContent,
+    renderTable,
+    setRenderTable
   };
 
  return (

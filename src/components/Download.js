@@ -3,7 +3,7 @@ import { CSVLink } from 'react-csv';
 import AppContext from '../context/AppContext';
 
 function Download() {
-  const { header, content, setContent, initialDocument } = useContext(AppContext)
+  const { header, content, initialDocument } = useContext(AppContext)
   const [readDownload, setReadDownload] = useState(false);
   const [finalDocument, setFinalDocument] = useState([]);
 
@@ -17,7 +17,7 @@ function Download() {
     <div>
       <CSVLink
         disabled
-        data={ readDownload ? initialDocument : initialDocument }
+        data={ readDownload ? finalDocument : initialDocument }
         filename={ 'inteligov-report.csv' }
         onClick={ () => {
           setReadDownload(true);

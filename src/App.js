@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import InputFile from "./components/InputFile";
+import React from "react";
 import AppProvider from "./context/AppProvider";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return(
     <AppProvider>
-      <InputFile/>
+      <HomePage />
     </AppProvider>
   );
 };
