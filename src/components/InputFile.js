@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
+import { ContainerDragAndDrop } from '../styled-components/InputFile';
 
 function InputFile() {
   const { 
@@ -21,25 +22,23 @@ function InputFile() {
   };
 
   return (
-    <div>
-      <div
-        onDragOver={(e) => {
+    <ContainerDragAndDrop
+      onDragOver={(e) => {
+      e.preventDefault();
+      }}
+      onDrop={(e) => { 
         e.preventDefault();
-        }}
-        onDrop={(e) => { 
-          e.preventDefault();
-          Array.from(e.dataTransfer.files)
-            .filter((file) => file.type === "text/csv")
-            .forEach(async (file) => {
-              const text = await file.text();
-              setFile(text);
-              handleSubmitFile(text);
-            });
-        }}
-      >
-        ARRASTE UM ARQUIVO
-      </div>
-     </div>
+        Array.from(e.dataTransfer.files)
+          .filter((file) => file.type === "text/csv")
+          .forEach(async (file) => {
+            const text = await file.text();
+            setFile(text);
+            handleSubmitFile(text);
+          });
+      }}
+    >
+      Arraste e solte seu documento aqui para carrega-lo
+    </ContainerDragAndDrop>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CSVLink } from 'react-csv';
 import AppContext from '../context/AppContext';
+import { ButtonDownload } from '../styled-components/Table';
 
 function Download() {
   const { header, content, initialDocument } = useContext(AppContext)
@@ -14,19 +15,17 @@ function Download() {
   }, [header, content])
 
   return (
-    <div>
-      <CSVLink
-        disabled
-        data={ readDownload ? finalDocument : initialDocument }
-        filename={ 'inteligov-report.csv' }
-        onClick={ () => {
-          setReadDownload(true);
-          setTimeout(() => setReadDownload(false), 2000);
-        }}
-      >
-        Baixe o arquivo
-      </CSVLink>
-    </div>
+    <ButtonDownload
+      disabled
+      data={ readDownload ? finalDocument : initialDocument }
+      filename={ 'inteligov-report.csv' }
+      onClick={ () => {
+        setReadDownload(true);
+        setTimeout(() => setReadDownload(false), 2000);
+      }}
+    >
+      Salvar
+    </ButtonDownload>
   )
 }
 

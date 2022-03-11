@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
+import { ContentInput, HeaderInputs } from '../styled-components/Table';
 
 function Table() {
   const { header, content, setContent } = useContext(AppContext)
@@ -20,7 +21,7 @@ function Table() {
     },
 
     createEmptyInputHeader: (header) => {
-      const HEADER_LENGTH = 2;
+      const HEADER_LENGTH = 8;
       for(let index = 0; index < HEADER_LENGTH; index ++) {
         header.push("");
       }
@@ -56,7 +57,7 @@ function Table() {
               header &&
               header.map((name, index) => (
                 <th key={index}>
-                  <input
+                  <HeaderInputs
                     id={index}
                     defaultValue={name}
                     onChange={handleInputs.handleHeader}
@@ -74,7 +75,7 @@ function Table() {
                   {
                     item.map((nameItens, indexItens) => (
                       <td key={indexItens}>
-                        <input
+                        <ContentInput
                           className={index}
                           name={indexItens}
                           defaultValue={nameItens}
