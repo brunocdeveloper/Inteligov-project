@@ -4,18 +4,11 @@ import Download from './Download';
 import Table from './Table';
 
 function InputFile() {
-  const { file, setFile, setHeader, setContent, setInitialDocument }  = useContext(AppContext);
+  const { setFile, setHeader, setContent, setInitialDocument }  = useContext(AppContext);
   const [ renderTable, setRenderTable] = useState(false);
-
-  const reader = new FileReader();
-
-  const handleFile = ({ target }) => {
-    setFile(target.files[0]);
-  };
 
   const handleSubmitFile = (file) => {
     if(file) {
-      console.log('textcsv', file);
       const [head, ...contents] = file.split('\n');
       const splitHeader = head.split(',')
       setHeader(splitHeader);
@@ -35,7 +28,6 @@ function InputFile() {
         }}
         onDrop={(e) => { 
           e.preventDefault();
-
           Array.from(e.dataTransfer.files)
             .filter((file) => file.type === "text/csv")
             .forEach(async (file) => {
@@ -47,8 +39,6 @@ function InputFile() {
       >
         ARRASTE UM ARQUIVO
       </div>
-      <input type="file" onChange={ handleFile } accept=".csv" />
-      <button type="button" onClick={ handleSubmitFile }>Enviar</button>
       {
         renderTable && 
         <Table/>
