@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '../context/AppContext';
+import Download from './Download';
 import Table from './Table';
 
 function InputFile() {
-  const { file, setFile, setHeader, setContent,  }  = useContext(AppContext);
+  const { file, setFile, setHeader, setContent, setInitialDocument }  = useContext(AppContext);
   const [ renderTable, setRenderTable] = useState(false);
 
   const reader = new FileReader();
@@ -17,9 +18,11 @@ function InputFile() {
       reader.onload = function(event) {
         const textCsv = event.target.result;
         const [head, ...contents] = textCsv.split('\n');
-        setHeader(head.split(','));
-        const conteudo = contents.map((lines) => lines.split(','));
-        setContent(conteudo);
+        const splitHeader = head.split(',')
+        setHeader(splitHeader);
+        const content = contents.map((lines) => lines.split(','));
+        setContent(content);
+        setInitialDocument([splitHeader, ...content]);
       };
       reader.readAsText(file);
       setRenderTable(true);
@@ -35,6 +38,10 @@ function InputFile() {
       {
         renderTable && 
         <Table/>
+      }
+      {
+        renderTable &&
+        <Download />
       }
      </div>
   );

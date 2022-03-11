@@ -6,29 +6,25 @@ function Table() {
 
   const tratamentDataTable = {
     createEmptyRowInputs: (dataContent) => {
-      const EMPTY_INPUTS_LENGHT = 8;
+      const EMPTY_INPUTS_LENGHT = 1;
       for(let index = 0; index < EMPTY_INPUTS_LENGHT; index ++) {
         dataContent.push(["", "", ""]);
-        console.log('looping createEmptyRowInputs')
       }
     },
 
     createEmptyColumnInputs: (dataContent, header) => {
-      const EMPTY_HEADER_LENGTH = 8;
+      const EMPTY_HEADER_LENGTH = 1;
       for(let index = 0; index < EMPTY_HEADER_LENGTH; index++) {
         dataContent.map((itens) => {
           itens.push("")
-          console.log('looping createEmptyColumnInputs')
         });
-        console.log('looping createEmptyColumnInputs')
       }
     },
 
     createEmptyInputHeader: (header) => {
-      const HEADER_LENGTH = 2;
+      const HEADER_LENGTH = 1;
       for(let index = 0; index < HEADER_LENGTH; index ++) {
         header.push("")
-        console.log('looping createEmptyInputHeader')
       }
     }
   }
@@ -53,7 +49,6 @@ function Table() {
     }
   }
 
-
   return (
     <div>
       <table>
@@ -62,7 +57,7 @@ function Table() {
             { 
               header &&
               header.map((name, index) => (
-                <th>
+                <th key={index}>
                   <input
                     id={index}
                     defaultValue={name}
@@ -77,10 +72,10 @@ function Table() {
           {
             content &&
             content.map((item, index) => (
-              <tr>
+              <tr key={index}>
                 {
                   item.map((nameItens, indexItens) => (
-                    <td>
+                    <td key={indexItens}>
                       <input
                         className={index}
                         name={indexItens}
