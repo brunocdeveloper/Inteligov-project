@@ -13,7 +13,6 @@ function Download() {
     }
   }, [header, content])
 
-  console.log('documento final', finalDocument);
   return (
     <div>
       <CSVLink

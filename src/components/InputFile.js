@@ -13,18 +13,15 @@ function InputFile() {
     setFile(target.files[0]);
   };
 
-  const handleSubmitFile = () => {
+  const handleSubmitFile = (file) => {
     if(file) {
-      reader.onload = function(event) {
-        const textCsv = event.target.result;
-        const [head, ...contents] = textCsv.split('\n');
-        const splitHeader = head.split(',')
-        setHeader(splitHeader);
-        const content = contents.map((lines) => lines.split(','));
-        setContent(content);
-        setInitialDocument([splitHeader, ...content]);
-      };
-      reader.readAsText(file);
+      console.log('textcsv', file);
+      const [head, ...contents] = file.split('\n');
+      const splitHeader = head.split(',')
+      setHeader(splitHeader);
+      const content = contents.map((lines) => lines.split(','));
+      setContent(content);
+      setInitialDocument([splitHeader, ...content]);
       setRenderTable(true);
     };
   };
@@ -32,7 +29,24 @@ function InputFile() {
   return (
     <div>
       <h1>Bem vindo!</h1>
-      <h2>Escolha um arquivo ou arraste</h2>
+      <div
+        onDragOver={(e) => {
+        e.preventDefault();
+        }}
+        onDrop={(e) => { 
+          e.preventDefault();
+
+          Array.from(e.dataTransfer.files)
+            .filter((file) => file.type === "text/csv")
+            .forEach(async (file) => {
+              const text = await file.text();
+              setFile(text);
+              handleSubmitFile(text);
+            });
+        }}
+      >
+        ARRASTE UM ARQUIVO
+      </div>
       <input type="file" onChange={ handleFile } accept=".csv" />
       <button type="button" onClick={ handleSubmitFile }>Enviar</button>
       {
